@@ -14,11 +14,14 @@ export default function LoginForm () {
   const [error, setError] = useState<string>('');
 
   const loginFormSubmit = async () => {
-    await loginSubmit({ login, password })
-      .then(() => redirect('/teste'))
-      .catch((error) => {
-        setError(error.message);
-      });
+    try {
+      await loginSubmit({ login, password });
+    } catch (error) {
+      setError(error.message);
+      return;
+    }
+
+    redirect('/teste');
   }
 
   useEffect(() => {
