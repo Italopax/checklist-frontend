@@ -20,7 +20,7 @@ export default function LoginForm () {
     setError,
   } = useGlobalContext();
 
-  async function loginFormSubmit (event: React.FormEvent<HTMLFormElement>) {
+  const loginFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
