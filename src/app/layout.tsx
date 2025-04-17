@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
+import { GlobalContextProvider } from "@/context/globalContext";
 
 export const metadata: Metadata = {
   title: "Checklist",
@@ -14,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={'antialiased'}>
-        {children}
+        <GlobalContextProvider>
+          {children}
+        </GlobalContextProvider>
       </body>
     </html>
   );
