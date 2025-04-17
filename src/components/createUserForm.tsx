@@ -7,22 +7,34 @@ import Button from "./button";
 import Form from "next/form";
 import { redirect } from "next/navigation";
 import { createUserSubmit } from "@/actions/createUser";
+import { useGlobalContext } from "@/context/globalContext";
 
 export default function CreateUserForm () {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [error, setError] = useState<string>('');
 
-  const createUserFormSubmit = async () => {
+  const {
+    loading,
+    setLoading,
+    error,
+    setError,
+  } = useGlobalContext();
+
+  const createUserFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     try {
+      setLoading(true);
       await createUserSubmit({ name, email, password });
     } catch (error) {
       setError(error.message);
       return;
+    } finally {
+      setLoading(false);
     }
 
-    redirect('/teste2');
+    redirect('/login');
   }
 
   useEffect(() => {
@@ -30,9 +42,9 @@ export default function CreateUserForm () {
   }, [name, email, password]);
 
   return (
-    <Form 
+    <form 
       className="flex flex-col gap-8"
-      action={createUserFormSubmit}
+      onSubmit={createUserFormSubmit}
     >
       <div className="flex flex-col gap-4">
         <Input
@@ -64,8 +76,9 @@ export default function CreateUserForm () {
         <Button
           text="Criar conta"
           type="submit"
+          loading={loading}
         />
       </div>
-    </Form>
+    </form>
   );
 }
