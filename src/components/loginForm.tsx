@@ -7,21 +7,33 @@ import Form from 'next/form';
 import { loginSubmit } from "@/actions/login";
 import ErrorMessage from "./errorMessage";
 import { redirect } from "next/navigation";
+import { useGlobalContext } from "@/context/globalContext";
 
 export default function LoginForm () {
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [error, setError] = useState<string>('');
+  
+  const {
+    loading,
+    setLoading,
+    error,
+    setError,
+  } = useGlobalContext();
 
-  const loginFormSubmit = async () => {
+  async function loginFormSubmit (event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
     try {
+      setLoading(true);
       await loginSubmit({ login, password });
     } catch (error) {
       setError(error.message);
       return;
+    } finally {
+      setLoading(false);
     }
 
-    redirect('/teste');
+    redirect('/validate-email');   
   }
 
   useEffect(() => {
@@ -29,9 +41,9 @@ export default function LoginForm () {
   }, [login, password]);
 
   return (
-    <Form 
+    <form 
       className="flex flex-col gap-8"
-      action={loginFormSubmit}
+      onSubmit={loginFormSubmit}
     >
       <div className="flex flex-col gap-4">
         <Input
@@ -57,8 +69,9 @@ export default function LoginForm () {
         <Button
           text="Login"
           type="submit"
+          loading={loading}
         />
       </div>
-    </Form>
+    </form>
   );
 }
