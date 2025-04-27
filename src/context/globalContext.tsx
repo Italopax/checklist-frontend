@@ -1,5 +1,6 @@
 'use client';
 
+import { User } from "@/models";
 import { Dispatch, SetStateAction, useContext, useState, createContext } from "react";
 
 type GlobalContextProviderProps = {
@@ -11,6 +12,8 @@ type GlobalContext = {
   setLoading: Dispatch<SetStateAction<boolean>>;
   error: string;
   setError: Dispatch<SetStateAction<string>>;
+  user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
 }
 
 export const GlobalContext = createContext<GlobalContext>({
@@ -18,18 +21,23 @@ export const GlobalContext = createContext<GlobalContext>({
   setLoading: () => {},
   error: '',
   setError: () => {},
+  user: null,
+  setUser: () => {},
 });
 
 export function GlobalContextProvider ({ children }: GlobalContextProviderProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const [user, setUser] = useState<User | null>(null);
 
   return (
     <GlobalContext.Provider value={{
       loading,
       setLoading,
       error,
-      setError
+      setError,
+      user,
+      setUser
     }}>
       { children }
     </GlobalContext.Provider>
