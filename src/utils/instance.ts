@@ -4,14 +4,5 @@ export function getServerInstance () {
   return axios.create({
     baseURL: 'http://localhost:3030',
     timeout: 10000,
-    withCredentials: true,
-  });
-}
-
-export function getClientInstance () {
-  return axios.create({
-    baseURL: 'http://localhost:3000',
-    timeout: 10000,
-    withCredentials: true,
   });
 }
