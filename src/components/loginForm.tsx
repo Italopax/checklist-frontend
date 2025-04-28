@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import Button from "./button";
 import Input from "./input";
-import Form from 'next/form';
-import { loginSubmit } from "@/actions/login";
+import { loginSubmit } from "@/actions/auth";
 import ErrorMessage from "./errorMessage";
 import { redirect } from "next/navigation";
 import { useGlobalContext } from "@/context/globalContext";
