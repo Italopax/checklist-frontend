@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import Input from "./input";
 import ErrorMessage from "./errorMessage";
 import Button from "./button";
-import Form from "next/form";
 import { redirect } from "next/navigation";
-import { createUserSubmit } from "@/actions/createUser";
+import { createUserSubmit } from "@/actions/user";
 import { useGlobalContext } from "@/context/globalContext";
 
 export default function CreateUserForm () {
