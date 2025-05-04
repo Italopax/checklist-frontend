@@ -21,3 +21,25 @@ export async function getMeData (): Promise<User> {
     throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
   }
 }
+
+export async function validateEmail (verificationCode: string): Promise<void> {
+  try {
+    const instance = getServerInstance();
+    await instance.post('/user/verify-email', {
+      verificationCode,
+    });
+  } catch (error) {
+    console.log('error:', error);
+    throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
+  }
+}
+
+export async function resendVerificationCode (): Promise<void> {
+  try {
+    const instance = getServerInstance();
+    await instance.post('/user/resend-verification-code');
+  } catch (error) {
+    console.log('error:', error);
+    throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
+  }
+}

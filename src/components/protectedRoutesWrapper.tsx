@@ -3,7 +3,9 @@
 import { refershToken } from "@/actions/auth";
 import { getMeData } from "@/actions/user";
 import { useGlobalContext } from "@/context/globalContext";
+import { UserStatus } from "@/models";
 import { Storage } from "@/utils/storage";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ProtectedRoutesWrapper ({ children }: { children: React.ReactNode }) {
@@ -39,8 +41,28 @@ export default function ProtectedRoutesWrapper ({ children }: { children: React.
       }
     }
 
-    getUserData()
+    getUserData();
   }, []);
+
+  const pathname = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    const isValidateEmailPage = pathname === '/validate-email';
+
+    switch (true) {
+      case user?.status === UserStatus.PENDING_VALIDATION && !isValidateEmailPage:
+        router.push('/validate-email');
+        break;
+
+      case user?.status === UserStatus.ACTIVE && isValidateEmailPage:
+        router.push('/');
+        break;
+
+      default:
+        return;
+    }
+  }, [isClientSide, pathname, user]);
 
   return (
     <>
