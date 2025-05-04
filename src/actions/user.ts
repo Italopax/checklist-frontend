@@ -4,9 +4,10 @@ import { getServerInstance } from "@/utils/instance";
 export async function createUserSubmit ({ name, email, password }: { name: string, email: string, password: string }): Promise<void> {
   try {
     const instance = getServerInstance();
-    await instance.post('/api/user/create-account', { name, email, password });
+    await instance.post('/user/create', { name, email, password });
   } catch (error) {
-    throw new Error(error.response?.data?.data?.errorMessage || 'Ocorreu um erro inesperado.');
+    console.log('error:', error);
+    throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
   }
 }
 
@@ -17,6 +18,6 @@ export async function getMeData (): Promise<User> {
     return data;
   } catch (error) {
     console.log('error:', error);
-    throw new Error(error.response?.data?.data?.errorMessage || 'Ocorreu um erro inesperado.');
+    throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
   }
 }
