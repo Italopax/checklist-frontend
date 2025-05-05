@@ -1,4 +1,6 @@
 import CreateUserForm from "@/components/createUserForm";
+import RedirectToOtherPage from "@/components/redirectToOtherPage";
+import { PagesRoutes } from "@/models";
 
 export default function CreateUser () {
   return (
@@ -7,8 +9,12 @@ export default function CreateUser () {
         <h1>Criação de conta</h1>
         <p>Crie a sua conta no <strong>Checklist</strong>.</p>
       </div>
-      <div>
+      <div className="flex flex-col gap-4">
         <CreateUserForm />
+        <RedirectToOtherPage
+          text="Já tem conta? Logue nela."
+          page={PagesRoutes.LOGIN}
+        />
       </div>
     </section>
   );

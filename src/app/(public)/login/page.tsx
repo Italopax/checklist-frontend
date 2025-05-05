@@ -1,4 +1,6 @@
 import LoginForm from "@/components/loginForm";
+import RedirectToOtherPage from "@/components/redirectToOtherPage";
+import { PagesRoutes } from "@/models";
 
 export default function Login() {
   return (
@@ -7,8 +9,12 @@ export default function Login() {
         <h1>Login</h1>
         <p>Realize o login na plataforma <strong>Checklist</strong>.</p>
       </div>
-      <div>
+      <div className="flex flex-col gap-4">
         <LoginForm />
+        <RedirectToOtherPage
+          text="Não tem conta? Crie a sua aqui."
+          page={PagesRoutes.CREATE_ACCOUNT}
+        />
       </div>
     </section>
   );
