@@ -7,6 +7,7 @@ import Button from "./button";
 import { redirect } from "next/navigation";
 import { createUserSubmit } from "@/actions/user";
 import { useGlobalContext } from "@/context/globalContext";
+import { PagesRoutes } from "@/models";
 
 export default function CreateUserForm () {
   const [name, setName] = useState<string>('');
@@ -33,7 +34,7 @@ export default function CreateUserForm () {
       setLoading(false);
     }
 
-    redirect('/login');
+    redirect(PagesRoutes.LOGIN);
   }
 
   useEffect(() => {

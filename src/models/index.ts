@@ -49,3 +49,12 @@ export type LoginCredentials = {
   email: string;
   password: string;
 }
+
+export enum PagesRoutes {
+  LOGIN = '/login',
+  CREATE_ACCOUNT = '/create-account',
+  VALIDATE_EMAIL = '/validate-email',
+  ROOT = '/',
+  PROFILE = '/profile',
+  ITEMS_GROUPS = '/items-groups',
+}

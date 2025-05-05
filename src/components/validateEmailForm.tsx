@@ -7,6 +7,7 @@ import Input from "./input";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getMeData, resendVerificationCode, validateEmail } from "@/actions/user";
+import { PagesRoutes } from "@/models";
 
 export default function ValidateEmailForm () {
   const [code, setCode] = useState<string>('');
@@ -36,7 +37,7 @@ export default function ValidateEmailForm () {
       setLoading(false);
     }
 
-    redirect('/');   
+    redirect(PagesRoutes.ROOT);   
   }
   
   const resendVerificationCodeSubmit = async (): Promise<void> => {

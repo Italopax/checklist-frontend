@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { PagesRoutes } from './models';
 
 export async function middleware (request: NextRequest) {
   const unproctedRoutes = ['/login', '/create-account', '/recovery-password'];
@@ -15,12 +16,12 @@ export async function middleware (request: NextRequest) {
       case !hasAuthorizationToken: 
         return NextResponse.next();
       case hasAuthorizationToken:
-        return NextResponse.redirect(new URL('/', request.nextUrl));
+        return NextResponse.redirect(new URL(PagesRoutes.ROOT, request.nextUrl));
     }
   } else {
     switch (true) {
       case !hasAuthorizationToken:
-        return NextResponse.redirect(new URL('/login', request.nextUrl));
+        return NextResponse.redirect(new URL(PagesRoutes.LOGIN, request.nextUrl));
       case hasAuthorizationToken:
         return NextResponse.next();
     }

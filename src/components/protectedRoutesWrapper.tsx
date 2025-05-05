@@ -3,7 +3,7 @@
 import { refershToken } from "@/actions/auth";
 import { getMeData } from "@/actions/user";
 import { useGlobalContext } from "@/context/globalContext";
-import { UserStatus } from "@/models";
+import { PagesRoutes, UserStatus } from "@/models";
 import { Storage } from "@/utils/storage";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -52,11 +52,11 @@ export default function ProtectedRoutesWrapper ({ children }: { children: React.
 
     switch (true) {
       case user?.status === UserStatus.PENDING_VALIDATION && !isValidateEmailPage:
-        router.push('/validate-email');
+        router.push(PagesRoutes.VALIDATE_EMAIL);
         break;
 
       case user?.status === UserStatus.ACTIVE && isValidateEmailPage:
-        router.push('/');
+        router.push(PagesRoutes.ROOT);
         break;
 
       default:

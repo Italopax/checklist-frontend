@@ -7,6 +7,7 @@ import { loginSubmit } from "@/actions/auth";
 import ErrorMessage from "./errorMessage";
 import { redirect } from "next/navigation";
 import { useGlobalContext } from "@/context/globalContext";
+import { PagesRoutes } from "@/models";
 
 export default function LoginForm () {
   const [login, setLogin] = useState<string>('');
@@ -32,7 +33,7 @@ export default function LoginForm () {
       setLoading(false);
     }
 
-    redirect('/validate-email');   
+    redirect(PagesRoutes.VALIDATE_EMAIL);   
   }
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 'use client';
 
+import { PagesRoutes } from "@/models";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
@@ -8,8 +9,8 @@ export default function Header () {
   const router = useRouter();
 
   const pagesInfos = [
-    { label: 'Perfil', route: '/profile' },
-    { label: 'Grupos de itens', route: '/items-groups' },
+    { label: 'Perfil', route: PagesRoutes.PROFILE },
+    { label: 'Grupos de itens', route: PagesRoutes.ITEMS_GROUPS },
   ];
 
   const actualPage = pagesInfos.find((page) => page.route === pathname)?.label;
