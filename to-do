@@ -1,0 +1,14 @@
+Features
+  deslogar
+
+Melhorias
+  função de tratar erros das requests nas actions
+  loadings unicos para cada lugar
+  toast message para sucesso ou erro (mensagem no topo da tela)
+  exibir senha no login/criação de conta
+  tipar retorno do axios das request ao backend
+  enums para páginas e outros valores
+  numero de vezes que o refresh token é chamado
+  caso alguma chamada receba 401, fazer com que o /refresh-token seja chamado e então refaça a chamada inicial
+  melhorar bloqueio do usuário as páginas no protectedRoutesWrapper
+  redirecionamento para /
