@@ -93,13 +93,13 @@ export default function UpdateAccountFielsForm () {
         <p>Atualize sua senha.</p>
         <form className="flex flex-col gap-4" onSubmit={updatePassword}>
           <Input
-            type="text"
+            type="password"
             placeholder="Senha atual"
             value={actualPassword}
             setValue={setActualPassword}
           />
           <Input
-            type="text"
+            type="password"
             placeholder="Nova senha"
             value={newPassword}
             setValue={setNewPassword}
