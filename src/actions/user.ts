@@ -43,3 +43,29 @@ export async function resendVerificationCode (): Promise<void> {
     throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
   }
 }
+
+export async function updateAccountInfos ({ name, email }: { name: string, email: string }): Promise<void> {
+  try {
+    const instance = getServerInstance();
+    await instance.put('/user/update', {
+      email,
+      name,
+    });
+  } catch (error) {
+    console.log('error:', error);
+    throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
+  }
+}
+
+export async function updateAccountPassword ({ actualPassword, newPassword }: { actualPassword: string, newPassword: string }): Promise<void> {
+  try {
+    const instance = getServerInstance();
+    await instance.patch('/user/update-password', {
+      actualPassword,
+      newPassword,
+    });
+  } catch (error) {
+    console.log('error:', error);
+    throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
+  }
+}
