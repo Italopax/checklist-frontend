@@ -6,13 +6,10 @@ import Input from "./input";
 import Button from "./button";
 import Divisor from "./divisor";
 import { getMeData, updateAccountInfos, updateAccountPassword } from "@/actions/user";
+import ErrorMessage from "./errorMessage";
 
 export default function UpdateAccountFielsForm () {
   const {
-    loading,
-    setLoading,
-    error,
-    setError,
     user,
     setUser,
   } = useGlobalContext();
@@ -23,25 +20,35 @@ export default function UpdateAccountFielsForm () {
   const [actualPassword, setActualPassword] = useState<string>('');
   const [newPassword, setNewPassword] = useState<string>('');
 
+  const [userDataLoading, setUserDataLoading] = useState<boolean>(false);
+  const [passwordsLoading, setPasswordsLoading] = useState<boolean>(false);
+
+  const [userDataError, setUserDataError] = useState<string>('');
+  const [passwordsError, setPasswordsError] = useState<string>('');
+
   useEffect(() => {
     setName(user?.name || '');
     setEmail(user?.email || '');
   }, [user]);
 
+  useEffect(() => setUserDataError(''), [name, email]);
+
+  useEffect(() => setPasswordsError(''), [actualPassword, newPassword]);
+
   const updateAccountData = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      setLoading(true);
+      setUserDataLoading(true);
       await updateAccountInfos({ email, name });
 
       const userData = await getMeData();
       setUser(userData);
     } catch (error) {
-      setError(error.message);
+      setUserDataError(error.message);
       return;
     } finally {
-      setLoading(false);
+      setUserDataLoading(false);
     }
   }
 
@@ -49,16 +56,16 @@ export default function UpdateAccountFielsForm () {
     event.preventDefault();
 
     try {
-      setLoading(true);
+      setPasswordsLoading(true);
       await updateAccountPassword({ newPassword, actualPassword });
 
       setActualPassword('');
       setNewPassword('');
     } catch (error) {
-      setError(error.message);
+      setPasswordsError(error.message);
       return;
     } finally {
-      setLoading(false);
+      setPasswordsLoading(false);
     }
   }
 
@@ -79,10 +86,15 @@ export default function UpdateAccountFielsForm () {
             value={email}
             setValue={setEmail}
           />
+          {userDataError && (
+            <ErrorMessage
+              error={userDataError}
+            />
+          )}
           <Button
             text="Atualizar informações de perfil"
             type="submit"
-            loading={loading}
+            loading={userDataLoading}
           />
         </form>
       </div>
@@ -104,10 +116,15 @@ export default function UpdateAccountFielsForm () {
             value={newPassword}
             setValue={setNewPassword}
           />
+          {passwordsError && (
+            <ErrorMessage
+              error={passwordsError}
+            />
+          )}
           <Button
             text="Atualizar senha"
             type="submit"
-            loading={loading}
+            loading={passwordsLoading}
           />
         </form>
       </div>
