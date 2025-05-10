@@ -26,27 +26,14 @@ export class Storage {
     return cookiesObject;
   }
 
-  static setNewCookies (newCookies: string): void {
-    document.cookie = newCookies;
-  }
-
-  static removeCookies (cookiesToRemove: string[]): void {
-    const currentCookies = this.getCookies();
+  static removeCookies (cookiesToRemove: string[] | string): void {
+    if (typeof cookiesToRemove === 'string') {
+      document.cookie = `${cookiesToRemove}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+      return;
+    }
 
     cookiesToRemove.forEach((cookie: string) => {
-      delete currentCookies[cookie];
+      document.cookie = `${cookie}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
     });
-
-    const stringCookies = Object.entries(currentCookies).reduce((newCookiesString, currentCookie) => {
-      const [cookieKey, cookieValue] = currentCookie;
-
-      if (newCookiesString.length) {
-        return `${newCookiesString}; ${cookieKey}=${cookieValue}`;
-      }
-
-      return `${cookieKey}=${cookieValue}`;
-    }, '');
-
-    this.setNewCookies(stringCookies);
   }
 }
