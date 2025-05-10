@@ -25,4 +25,28 @@ export class Storage {
 
     return cookiesObject;
   }
+
+  static setNewCookies (newCookies: string): void {
+    document.cookie = newCookies;
+  }
+
+  static removeCookies (cookiesToRemove: string[]): void {
+    const currentCookies = this.getCookies();
+
+    cookiesToRemove.forEach((cookie: string) => {
+      delete currentCookies[cookie];
+    });
+
+    const stringCookies = Object.entries(currentCookies).reduce((newCookiesString, currentCookie) => {
+      const [cookieKey, cookieValue] = currentCookie;
+
+      if (newCookiesString.length) {
+        return `${newCookiesString}; ${cookieKey}=${cookieValue}`;
+      }
+
+      return `${cookieKey}=${cookieValue}`;
+    }, '');
+
+    this.setNewCookies(stringCookies);
+  }
 }
