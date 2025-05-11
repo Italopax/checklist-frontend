@@ -27,7 +27,7 @@ export default function Header () {
 
   return (
     <header className="bg-(--border)">
-      <div className="flex max-w-7xl m-auto px-16 py-4 gap-4 justify-between">
+      <div className="flex max-w-7xl m-auto px-16 py-4 gap-4 justify-between items-center">
         <div className="flex gap-4">
           {pageShortcut.map((page) => {
             return (
