@@ -2,6 +2,7 @@
 
 import Header from "@/components/header";
 import ProtectedRoutesWrapper from "@/components/protectedRoutesWrapper";
+import { PagesRoutes } from "@/models";
 import { usePathname } from "next/navigation";
 
 export default function PrivateRoutesLayout ({ children }: Readonly<{
@@ -10,11 +11,15 @@ export default function PrivateRoutesLayout ({ children }: Readonly<{
   const pathname = usePathname();
   const useHeader = pathname !== '/validate-email';
 
+  const cardPageStyle = 'flex justify-center items-center flex-1';
+  const pagesWithCenterCardStyle = [PagesRoutes.VALIDATE_EMAIL];
+  const mainStyle = pagesWithCenterCardStyle.includes(pathname) ? cardPageStyle : '';
+
   return (
     <ProtectedRoutesWrapper>
       <div className="flex flex-col min-h-dvh">
         {useHeader && <Header />}
-        <main className="flex justify-center items-center flex-1">
+        <main className={`py-8 ${mainStyle}`}>
           {children}
         </main>
       </div>

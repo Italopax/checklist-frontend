@@ -7,6 +7,7 @@ interface ButtonProps {
   loading?: boolean;
   onSubmit?: FormEventHandler<HTMLButtonElement> | undefined;
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
+  secondaryColor?: boolean;
 }
 
 export default function Button ({
@@ -14,15 +15,18 @@ export default function Button ({
   type,
   loading = false,
   onClick,
+  secondaryColor,
 }: ButtonProps) {
-  const hoverButtonClasses = !loading ? 'hover:bg-(--background)/80' : '';
+  const backgroundColor = secondaryColor ? 'bg-(--border)' : 'bg-(--background)';
+
+  const hoverButtonClasses = !loading ? `hover:opacity-80` : '';
   const buttonContent = loading ? <Loading /> : text;
 
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`bg-(--background) ${hoverButtonClasses} px-4 py-2 rounded-lg cursor-pointer`}
+      className={`${backgroundColor} ${hoverButtonClasses} px-4 py-2 rounded-lg cursor-pointer`}
     >
       {buttonContent}
     </button>
