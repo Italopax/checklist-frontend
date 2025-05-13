@@ -40,6 +40,7 @@ export default function CreateItemsGroupModal ({ setShowModalState, getItemsGrou
   return (
     <Modal
       showModal={setShowModalState}
+      title='Crie um grupo de itens'
     >
       <div className="flex flex-col gap-2">
         <form className="flex gap-4" onSubmit={createItemsGroup}>
