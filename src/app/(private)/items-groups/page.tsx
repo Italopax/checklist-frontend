@@ -3,6 +3,7 @@
 import { getItemsGroups } from "@/actions/items-groups";
 import Button from "@/components/button";
 import CreateItemsGroupModal from "@/components/createItemsGroupModal";
+import DeleteItemsGroupModal from "@/components/deleteItemsGroupModal";
 import Divisor from "@/components/divisor";
 import Input from "@/components/input";
 import ItemsGroupList from "@/components/itemsGroupList";
@@ -22,8 +23,6 @@ export default function ItemsGroups () {
   const [showDeleteGroupModal, setShowDeleteGroupModal] = useState<boolean>(false);
 
   const [selectedItemsGroup, setSelectedItemsGroup] = useState<ItemsGroup | undefined>();
-
-  // modal de deleção
 
   async function getItemsGroupsList (): Promise<void> {
     try {
@@ -94,6 +93,13 @@ export default function ItemsGroups () {
         <UpdateItemsGroupModal
           selectedItemsGroup={selectedItemsGroup}
           setShowModalState={setShowUpdateGroupModal}
+          getItemsGroupsList={getItemsGroupsList}
+        />
+      )}
+      {showDeleteGroupModal && (
+        <DeleteItemsGroupModal
+          selectedItemsGroup={selectedItemsGroup}
+          setShowModalState={setShowDeleteGroupModal}
           getItemsGroupsList={getItemsGroupsList}
         />
       )}

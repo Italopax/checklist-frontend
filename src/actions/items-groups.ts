@@ -37,3 +37,14 @@ export async function updateItemsGroups (newName: string, itemsGroupId: string):
     throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
   }
 }
+
+export async function deleteItemsGroups (itemsGroupId: string): Promise<ItemsGroup> {
+  try {
+    const instance = getServerInstance();
+    const { data: { data } } = await instance.delete(`/items-group/${itemsGroupId}`);
+    return data;
+  } catch (error) {
+    console.log('error:', error);
+    throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
+  }
+}
