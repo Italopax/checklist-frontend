@@ -5,7 +5,9 @@ import Button from "@/components/button";
 import CreateItemsGroupModal from "@/components/createItemsGroupModal";
 import Divisor from "@/components/divisor";
 import Input from "@/components/input";
+import ItemsGroupList from "@/components/itemsGroupList";
 import Loading from "@/components/loading";
+import UpdateItemsGroupModal from "@/components/updateItemsGroupModal";
 import { ItemsGroup } from "@/models";
 import { useEffect, useState } from "react";
 
@@ -16,6 +18,12 @@ export default function ItemsGroups () {
   const [searchError, setSearchError] = useState<string>('');
 
   const [showCreateGroupModal, setShowCreateGroupModal] = useState<boolean>(false);
+  const [showUpdateGroupModal, setShowUpdateGroupModal] = useState<boolean>(false);
+  const [showDeleteGroupModal, setShowDeleteGroupModal] = useState<boolean>(false);
+
+  const [selectedItemsGroup, setSelectedItemsGroup] = useState<ItemsGroup | undefined>();
+
+  // modal de deleção
 
   async function getItemsGroupsList (): Promise<void> {
     try {
@@ -67,19 +75,25 @@ export default function ItemsGroups () {
           {loadingSearch ? (
             <Loading />
           ) : (
-            itemsGroups.length === 0 ? (
-              <div className="flex flex-1 justify-center">
-                <p>Não há grupos cadastrados</p>
-              </div>
-            ) : (
-              <></> // criar componente para listagem dos cards
-            ))
-          }
+            <ItemsGroupList
+              itemsGroups={itemsGroups}
+              setItemsGroup={setSelectedItemsGroup}
+              showItemsGroupUpdateModal={setShowUpdateGroupModal}
+              showItemsGroupDeleteModal={setShowDeleteGroupModal}
+            />
+          )}
         </div>
       </div>
       {showCreateGroupModal && (
         <CreateItemsGroupModal
           setShowModalState={setShowCreateGroupModal}
+          getItemsGroupsList={getItemsGroupsList}
+        />
+      )}
+      {showUpdateGroupModal && (
+        <UpdateItemsGroupModal
+          selectedItemsGroup={selectedItemsGroup}
+          setShowModalState={setShowUpdateGroupModal}
           getItemsGroupsList={getItemsGroupsList}
         />
       )}

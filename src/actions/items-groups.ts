@@ -24,3 +24,16 @@ export async function createItemsGroups (name: string): Promise<ItemsGroup> {
     throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
   }
 }
+
+export async function updateItemsGroups (newName: string, itemsGroupId: string): Promise<ItemsGroup> {
+  try {
+    const instance = getServerInstance();
+    const { data: { data } } = await instance.put(`/items-group/${itemsGroupId}`, {
+      name: newName,
+    });
+    return data;
+  } catch (error) {
+    console.log('error:', error);
+    throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
+  }
+}
