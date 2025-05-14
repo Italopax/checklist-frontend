@@ -1,6 +1,6 @@
 'use client';
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Modal from "./modal";
 import Input from "./input";
 import Button from "./button";
@@ -34,6 +34,10 @@ export default function UpdateItemsGroupModal ({ setShowModalState, getItemsGrou
       getItemsGroupsList();
     }
   }
+
+  useEffect(() => {
+    setErrorUpdate('');
+  }, [newItemsGroupsName]);
 
   return (
     <Modal
