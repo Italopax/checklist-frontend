@@ -1,12 +1,10 @@
 'use client';
 
 import { getItemsGroups } from "@/actions/items-groups";
-import Button from "@/components/button";
 import CreateItemsGroupModal from "@/components/createItemsGroupModal";
 import DeleteItemsGroupModal from "@/components/deleteItemsGroupModal";
-import Divisor from "@/components/divisor";
-import Input from "@/components/input";
 import ItemsGroupList from "@/components/itemsGroupList";
+import ListItemsPageTemplate from "@/components/listItemsPageTemplate";
 import Loading from "@/components/loading";
 import UpdateItemsGroupModal from "@/components/updateItemsGroupModal";
 import { ItemsGroup } from "@/models";
@@ -41,47 +39,32 @@ export default function ItemsGroups () {
   }, []);
 
   return (
-    <section
-      className="flex max-w-7xl m-auto px-16 gap-4 justify-between items-center"
+    <ListItemsPageTemplate
+      inputSearch={{
+        placeholder: "Filtrar itens",
+        value: itemsGroupsSearch,
+        setValue: setItemsGroupsSearch
+      }} 
+      searchButton={{
+        text: "Buscar",
+        onClick: () => {}
+      }}
+      createButton={{
+        text: "Criar um novo grupo",
+        onClick: () => setShowCreateGroupModal(true)
+      }}
     >
-      <div className="flex flex-col flex-1 p-4 rounded gap-8">
-        <div className="flex justify-between">
-          <div className="flex gap-4">
-            <Input
-              type='text'
-              placeholder='Filtrar grupo de itens'
-              value={itemsGroupsSearch}
-              setValue={setItemsGroupsSearch}
-            />
-            <Button
-              text='Buscar'
-              type='button'
-              onClick={() => {}}
-              secondaryColor
-            />
-          </div>
-          <div className="flex gap-4">
-            <Button
-              text='Criar um novo grupo'
-              type='button'
-              secondaryColor
-              onClick={() => setShowCreateGroupModal(true)}
-            />
-          </div>
-        </div>
-        <Divisor />
-        <div>
-          {loadingSearch ? (
-            <Loading />
-          ) : (
-            <ItemsGroupList
-              itemsGroups={itemsGroups}
-              setItemsGroup={setSelectedItemsGroup}
-              showItemsGroupUpdateModal={setShowUpdateGroupModal}
-              showItemsGroupDeleteModal={setShowDeleteGroupModal}
-            />
-          )}
-        </div>
+      <div>
+        {loadingSearch ? (
+          <Loading />
+        ) : (
+          <ItemsGroupList
+            itemsGroups={itemsGroups}
+            setItemsGroup={setSelectedItemsGroup}
+            showItemsGroupUpdateModal={setShowUpdateGroupModal}
+            showItemsGroupDeleteModal={setShowDeleteGroupModal}
+          />
+        )}
       </div>
       {showCreateGroupModal && (
         <CreateItemsGroupModal
@@ -103,6 +86,6 @@ export default function ItemsGroups () {
           getItemsGroupsList={getItemsGroupsList}
         />
       )}
-    </section>
+    </ListItemsPageTemplate>
   );
 }
