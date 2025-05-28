@@ -1,6 +1,7 @@
-import { ItemsGroup } from "@/models";
+import { ItemsGroup, PagesRoutes } from "@/models";
 import Button from "./button";
 import { Dispatch, SetStateAction } from "react";
+import { redirect } from "next/navigation";
 
 export interface ItemsGroupProps {
   itemsGroups: ItemsGroup[];
@@ -26,13 +27,19 @@ export default function ItemsGroupList ({ itemsGroups, setItemsGroup, showItemsG
     </div>
   );
 
+  const redirectToItemGroupPage = (itemsGroupId: number, event: React.MouseEvent<HTMLElement>) => {
+    if (event.target?.id?.includes('itemsGroupItem')) redirect(`${PagesRoutes.ITEMS_GROUPS}/${itemsGroupId}`);
+  };
+
   return (
     <div className="w-full flex flex-col gap-4">
       {itemsGroups.map((itemsGroup) => {
         return (
           <div
             key={itemsGroup.id}
-            className="bg-(--border) py-4 px-8 flex items-center justify-between rounded"
+            className="bg-(--border) py-4 px-8 flex items-center justify-between rounded cursor-pointer"
+            onClick={(event: React.MouseEvent<HTMLElement>) => redirectToItemGroupPage(itemsGroup.id, event)}
+            id="itemsGroupItem"
           >
             <h3>
               {itemsGroup.name}
