@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Button from "./button";
-import Input from "./input";
+import Input from "./inputs/input";
 import { loginSubmit } from "@/actions/auth";
 import ErrorMessage from "./errorMessage";
 import { redirect } from "next/navigation";

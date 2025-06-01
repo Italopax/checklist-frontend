@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Modal from "./modal";
-import Input from "./input";
+import Input from "./inputs/input";
 import Button from "./button";
 import ErrorMessage from "./errorMessage";
 import { Item } from "@/models";

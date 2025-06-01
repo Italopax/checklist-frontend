@@ -3,7 +3,7 @@
 import { useGlobalContext } from "@/context/globalContext";
 import Button from "./button";
 import ErrorMessage from "./errorMessage";
-import Input from "./input";
+import Input from "./inputs/input";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getMeData, resendVerificationCode, validateEmail } from "@/actions/user";

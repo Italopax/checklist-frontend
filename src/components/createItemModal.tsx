@@ -3,7 +3,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Button from "./button";
 import ErrorMessage from "./errorMessage";
-import Input from "./input";
+import Input from "./inputs/input";
 import Modal from "./modal";
 import { createItem } from "@/actions/items";
 

@@ -34,9 +34,12 @@ export default function ItemsList ({ items, setItem, showItemUpdateModal, showIt
             key={item.id}
             className="bg-(--border) hover:opacity-80 py-4 px-8 flex items-center justify-between rounded cursor-pointer"
           >
-            <h3>
-              {item.name}
-            </h3>
+            <div className="flex gap-4 items-center ">
+              <input type="checkbox" checked={true} />
+              <h3>
+                {item.name}
+              </h3>
+            </div>
             <div className="flex items-center justify-center gap-2">
               <Button
                 text='Atualizar'

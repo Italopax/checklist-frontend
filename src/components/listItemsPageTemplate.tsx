@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import Button from "./button";
 import Divisor from "./divisor";
-import Input from "./input";
+import Input from "./inputs/input";
 
 interface ListItemsPageTemplateProps {
   children: React.ReactNode;

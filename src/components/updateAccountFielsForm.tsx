@@ -2,7 +2,7 @@
 
 import { useGlobalContext } from "@/context/globalContext";
 import { useEffect, useState } from "react";
-import Input from "./input";
+import Input from "./inputs/input";
 import Button from "./button";
 import Divisor from "./divisor";
 import { getMeData, updateAccountInfos, updateAccountPassword } from "@/actions/user";

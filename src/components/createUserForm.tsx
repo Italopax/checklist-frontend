@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import Input from "./input";
+import Input from "./inputs/input";
 import ErrorMessage from "./errorMessage";
 import Button from "./button";
 import { redirect } from "next/navigation";
