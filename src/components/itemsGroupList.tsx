@@ -37,7 +37,7 @@ export default function ItemsGroupList ({ itemsGroups, setItemsGroup, showItemsG
         return (
           <div
             key={itemsGroup.id}
-            className="bg-(--border) py-4 px-8 flex items-center justify-between rounded cursor-pointer"
+            className="bg-(--border) hover:opacity-80 py-4 px-8 flex items-center justify-between rounded cursor-pointer"
             onClick={(event: React.MouseEvent<HTMLElement>) => redirectToItemGroupPage(itemsGroup.id, event)}
             id="itemsGroupItem"
           >
