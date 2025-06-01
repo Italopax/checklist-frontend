@@ -1,15 +1,19 @@
 import { Item, } from "@/models";
 import Button from "./button";
 import { Dispatch, SetStateAction } from "react";
+import InputCheckbox from "./inputs/inputCheckbox";
+import Divisor from "./divisor";
+import { updateItem } from "@/actions/items";
 
 export interface ItemsProps {
   items: Item[];
   setItem: Dispatch<SetStateAction<Item | undefined>>
   showItemUpdateModal: Dispatch<SetStateAction<boolean>>
   showItemDeleteModal: Dispatch<SetStateAction<boolean>>
+  getItemsList (): Promise<void>;
 }
 
-export default function ItemsList ({ items, setItem, showItemUpdateModal, showItemDeleteModal }: ItemsProps) {
+export default function ItemsList ({ items, setItem, showItemUpdateModal, showItemDeleteModal, getItemsList }: ItemsProps) {
   const updateButtonAction = (item: Item) => {
     setItem(item);
     showItemUpdateModal(true);
@@ -20,11 +24,24 @@ export default function ItemsList ({ items, setItem, showItemUpdateModal, showIt
     showItemDeleteModal(true);
   }
 
+  const checkItem = async (event: React.MouseEvent<HTMLInputElement, MouseEvent>, id: number) => {
+    try {
+      const isCheckedValue = event.target.checked;
+      await updateItem(String(id), { isChecked: isCheckedValue });
+    } catch (error) {
+      return;
+    } finally {
+      getItemsList();
+    }
+  }
+
   if (!items.length) return (
     <div className="flex flex-1 justify-center">
       <p>Não há itens cadastrados</p>
     </div>
   );
+
+  const styleFromItemCheckStatus = (isChecked: boolean) => isChecked ? 'opacity-80' : 'hover:opacity-80';
 
   return (
     <div className="w-full flex flex-col gap-4">
@@ -32,11 +49,15 @@ export default function ItemsList ({ items, setItem, showItemUpdateModal, showIt
         return (
           <div
             key={item.id}
-            className="bg-(--border) hover:opacity-80 py-4 px-8 flex items-center justify-between rounded cursor-pointer"
+            className={`bg-(--border) py-4 px-8 flex items-center justify-between rounded cursor-pointer ${styleFromItemCheckStatus(item.isChecked)}`}
           >
-            <div className="flex gap-4 items-center ">
-              <input type="checkbox" checked={true} />
-              <h3>
+            <div className="flex gap-4 items-center">
+              <InputCheckbox
+                id={Number(item.id)}
+                checked={item.isChecked}
+                onClickAction={checkItem}
+              />
+              <h3 className={`${item.isChecked && 'line-through'}`}>
                 {item.name}
               </h3>
             </div>

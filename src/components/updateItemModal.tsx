@@ -24,7 +24,7 @@ export default function UpdateItemModal ({ setShowModalState, getItemsList, sele
 
     try {
       setLoadingUpdate(true);
-      await updateItem(newItemName, String(selectedItem?.id));
+      await updateItem(String(selectedItem?.id), { name: newItemName });
       setShowModalState(false);
     } catch (error) {
       setErrorUpdate(error.message);

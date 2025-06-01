@@ -70,6 +70,7 @@ export default function ItemsGroupDetails ({}: ItemsGroupDetailsProps) {
             setItem={setSelectedItem}
             showItemUpdateModal={setShowUpdateItemModal}
             showItemDeleteModal={setShowDeleteItemModal}
+            getItemsList={getItemsList}
           />
         )}
       </div>

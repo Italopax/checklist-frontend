@@ -26,12 +26,18 @@ export async function createItem (name: string, itemsGroupId: string): Promise<I
   }
 }
 
-export async function updateItem (newName: string, itemId: string): Promise<ItemsGroup> {
+export async function updateItem (
+  itemId: string,
+  { name, isChecked }: { name?: string, isChecked?: boolean }
+): Promise<ItemsGroup> {
   try {
+    const body = {
+      ...(name && { name }),
+      ...((isChecked || isChecked === false) && { isChecked }),
+    };
+
     const instance = getServerInstance();
-    const { data: { data } } = await instance.put(`/item/${itemId}`, {
-      name: newName,
-    });
+    const { data: { data } } = await instance.put(`/item/${itemId}`, body);
     return data;
   } catch (error) {
     console.log('error:', error);
