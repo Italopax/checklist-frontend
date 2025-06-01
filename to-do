@@ -1,10 +1,11 @@
 Features
-  deslogar
+  filtro de grupo de itens
+  recuperação de senha
+  toast message para sucesso ou erro (mensagem no topo da tela)
 
 Melhorias
   função de tratar erros das requests nas actions
   loadings unicos para cada lugar
-  toast message para sucesso ou erro (mensagem no topo da tela)
   exibir senha no login/criação de conta
   tipar retorno do axios das request ao backend
   enums para páginas e outros valores
@@ -12,3 +13,6 @@ Melhorias
   caso alguma chamada receba 401, fazer com que o /refresh-token seja chamado e então refaça a chamada inicial
   melhorar bloqueio do usuário as páginas no protectedRoutesWrapper
   redirecionamento para /
+  nomes das variaveis de cores
+  limitar o numero de caracteres exibidos na listagem de grupo de itens
+  
