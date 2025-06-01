@@ -21,7 +21,7 @@ export default function ItemsGroups () {
   const [showDeleteGroupModal, setShowDeleteGroupModal] = useState<boolean>(false);
 
   const [selectedItemsGroup, setSelectedItemsGroup] = useState<ItemsGroup | undefined>();
-
+  
   async function getItemsGroupsList (): Promise<void> {
     try {
       setLoadingSearch(true);
