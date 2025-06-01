@@ -15,4 +15,5 @@ Melhorias
   redirecionamento para /
   nomes das variaveis de cores
   limitar o numero de caracteres exibidos na listagem de grupo de itens
-  
+  dar o check em um item
+  inverter ordem dos parametros para o id ser o primeiro
