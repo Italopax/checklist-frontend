@@ -1,4 +1,4 @@
-import { deleteItemsGroups, updateItemsGroups } from "@/actions/items-groups";
+import { deleteItemsGroups } from "@/actions/items-groups";
 import { ItemsGroup } from "@/models";
 import { Dispatch, SetStateAction, useState } from "react";
 import Button from "./button";

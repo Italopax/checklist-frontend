@@ -2,7 +2,6 @@ import { Item, } from "@/models";
 import Button from "./button";
 import { Dispatch, SetStateAction } from "react";
 import InputCheckbox from "./inputs/inputCheckbox";
-import Divisor from "./divisor";
 import { updateItem } from "@/actions/items";
 
 export interface ItemsProps {
@@ -28,7 +27,7 @@ export default function ItemsList ({ items, setItem, showItemUpdateModal, showIt
     try {
       const isCheckedValue = event.target.checked;
       await updateItem(String(id), { isChecked: isCheckedValue });
-    } catch (error) {
+    } catch {
       return;
     } finally {
       getItemsList();
