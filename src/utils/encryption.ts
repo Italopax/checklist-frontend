@@ -8,6 +8,6 @@ export default class Encryption implements EncryptionInterface {
   public decriyt(token: string): { [key: string]: unknown; } {
     const tokenData = jwt.decode(token);
 
-    return tokenData as object;
+    return tokenData as { [key: string]: unknown; };
   }
 }

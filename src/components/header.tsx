@@ -25,6 +25,11 @@ export default function Header () {
     router.push(PagesRoutes.LOGIN);
   }
 
+  function getRoute (page: string): string {
+    const pageRoute: string = pagesInfos.find((pageInfo) => pageInfo.label === page)?.route || '/';
+    return pageRoute;
+  }
+
   return (
     <header className="bg-(--border)">
       <div className="flex max-w-7xl m-auto px-16 py-4 gap-4 justify-between items-center">
@@ -35,7 +40,7 @@ export default function Header () {
                 key={page}
                 className={`cursor-pointer ${pageSelectedStyle(page)}`}
                 onClick={() => {
-                  router.push(pagesInfos.find((pageInfo) => pageInfo.label === page).route)
+                  router.push(getRoute(page));
                 }}
               >
                 {page}

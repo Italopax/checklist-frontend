@@ -10,7 +10,7 @@ interface ModalProps {
 
 export default function Modal ({ showModal, children, title }: ModalProps) {
   const closeModal = (event: React.MouseEvent<HTMLInputElement>) => {
-    if (['modalBackgroud', 'closeModalButton'].includes(event.target?.id)) showModal(false);
+    if (['modalBackgroud', 'closeModalButton'].includes((event.target as HTMLInputElement)?.id)) showModal(false);
   };
   
   return (

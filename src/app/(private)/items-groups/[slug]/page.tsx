@@ -21,7 +21,7 @@ export default function ItemsGroupDetails ({}: ItemsGroupDetailsProps) {
   const [items, setItems] = useState<Item[]>([]);
   const [itemsSearch, setItemsSearch] = useState<string>('');
   const [loadingSearch, setLoadingSearch] = useState<boolean>(true);
-  const [searchError, setSearchError] = useState<string>('');
+  const [, setSearchError] = useState<string>('');
 
   const [showCreateItemModal, setShowCreateItemModal] = useState<boolean>(false);
   const [showUpdateItemModal, setShowUpdateItemModal] = useState<boolean>(false);

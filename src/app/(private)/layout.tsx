@@ -12,7 +12,7 @@ export default function PrivateRoutesLayout ({ children }: Readonly<{
   const useHeader = pathname !== '/validate-email';
 
   const cardPageStyle = 'flex justify-center items-center flex-1';
-  const pagesWithCenterCardStyle = [PagesRoutes.VALIDATE_EMAIL];
+  const pagesWithCenterCardStyle: string[] = [PagesRoutes.VALIDATE_EMAIL];
   const mainStyle = pagesWithCenterCardStyle.includes(pathname) ? cardPageStyle : '';
 
   return (

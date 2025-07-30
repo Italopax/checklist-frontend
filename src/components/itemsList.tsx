@@ -25,7 +25,7 @@ export default function ItemsList ({ items, setItem, showItemUpdateModal, showIt
 
   const checkItem = async (event: React.MouseEvent<HTMLInputElement, MouseEvent>, id: number) => {
     try {
-      const isCheckedValue = event.target.checked;
+      const isCheckedValue = (event.target as HTMLInputElement).checked;
       await updateItem(String(id), { isChecked: isCheckedValue });
     } catch {
       return;

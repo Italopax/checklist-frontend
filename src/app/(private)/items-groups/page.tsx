@@ -14,7 +14,7 @@ export default function ItemsGroups () {
   const [itemsGroups, setItemsGroups] = useState<ItemsGroup[]>([]);
   const [itemsGroupsSearch, setItemsGroupsSearch] = useState<string>('');
   const [loadingSearch, setLoadingSearch] = useState<boolean>(true);
-  const [searchError, setSearchError] = useState<string>('');
+  const [, setSearchError] = useState<string>('');
 
   const [showCreateGroupModal, setShowCreateGroupModal] = useState<boolean>(false);
   const [showUpdateGroupModal, setShowUpdateGroupModal] = useState<boolean>(false);

@@ -11,7 +11,7 @@ import { updateItem } from "@/actions/items";
 interface UpdateItemModalProps {
   setShowModalState: Dispatch<SetStateAction<boolean>>;
   getItemsList (): Promise<void>;
-  selectedItem: Item;
+  selectedItem?: Item;
 }
 
 export default function UpdateItemModal ({ setShowModalState, getItemsList, selectedItem }: UpdateItemModalProps) {

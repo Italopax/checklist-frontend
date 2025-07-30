@@ -22,6 +22,7 @@ export type User = {
 }
 
 export type ItemsGroup = BaseEntityType & {
+  id: number;
   name: string;
   userId: number;
   items?: Item[];

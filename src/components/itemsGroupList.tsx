@@ -28,7 +28,8 @@ export default function ItemsGroupList ({ itemsGroups, setItemsGroup, showItemsG
   );
 
   const redirectToItemGroupPage = (itemsGroupId: number, event: React.MouseEvent<HTMLElement>) => {
-    if (event.target?.id?.includes('itemsGroupItem')) redirect(`${PagesRoutes.ITEMS_GROUPS}/${itemsGroupId}`);
+    const targetId = (event.target as HTMLElement)?.id;
+    if (targetId?.includes('itemsGroupItem')) redirect(`${PagesRoutes.ITEMS_GROUPS}/${itemsGroupId}`);
   };
 
   return (
