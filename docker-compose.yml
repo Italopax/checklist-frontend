@@ -1,0 +1,7 @@
+services:
+  app:
+    container_name: "checklist-frontend"
+    restart: always
+    build: .
+    ports:
+      - "3021:3000"
