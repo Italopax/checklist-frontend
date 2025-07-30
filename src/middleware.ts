@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { PagesRoutes } from './models';
 
 export async function middleware (request: NextRequest) {
-  const unproctedRoutes = ['/login', '/create-account', '/recovery-password'];
+  const unproctedRoutes = ['/login', '/create-account', '/recovery-password', '/new-password'];
   const applicationCookies = (await cookies()).getAll();
 
   const accessToken = applicationCookies.find((cookie) => cookie.name === 'accessToken');

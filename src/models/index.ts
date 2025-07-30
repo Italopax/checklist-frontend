@@ -54,6 +54,8 @@ export type LoginCredentials = {
 export enum PagesRoutes {
   LOGIN = '/login',
   CREATE_ACCOUNT = '/create-account',
+  RECOVERY_PASSWORD = '/recovery-password',
+  NEW_PASSWORD = '/new-password',
   VALIDATE_EMAIL = '/validate-email',
   ROOT = '/',
   PROFILE = '/profile',

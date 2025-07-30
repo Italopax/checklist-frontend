@@ -11,10 +11,16 @@ export default function Login() {
       </div>
       <div className="flex flex-col gap-4">
         <LoginForm />
-        <RedirectToOtherPage
-          text="Não tem conta? Crie a sua aqui."
-          page={PagesRoutes.CREATE_ACCOUNT}
-        />
+        <div className="flex flex-col gap-2">
+          <RedirectToOtherPage
+            text="Não tem conta? Crie a sua aqui."
+            page={PagesRoutes.CREATE_ACCOUNT}
+          />
+          <RedirectToOtherPage
+            text="Esqueceu a senha? Recupere aqui."
+            page={PagesRoutes.RECOVERY_PASSWORD}
+          />
+        </div>
       </div>
     </section>
   );

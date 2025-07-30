@@ -34,6 +34,32 @@ export async function validateEmail (verificationCode: string): Promise<void> {
   }
 }
 
+export async function sendRecoveryPasswordVerificationCode (email: string): Promise<void> {
+  try {
+    const instance = getServerInstance();
+    await instance.post('/user/send-recovery-passoword-verification-code', {
+      email,
+    });
+  } catch (error) {
+    console.log('error:', error);
+    throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
+  }
+}
+
+export async function recoveryPassword ({ verificationCode, newPassword, email }: { verificationCode: string, newPassword: string, email: string }): Promise<void> {
+  try {
+    const instance = getServerInstance();
+    await instance.post('/user/recovery-password', {
+      verificationCode,
+      newPassword,
+      email,
+    });
+  } catch (error) {
+    console.log('error:', error);
+    throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
+  }
+}
+
 export async function resendVerificationCode (): Promise<void> {
   try {
     const instance = getServerInstance();
