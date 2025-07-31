@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function getServerInstance () {
   return axios.create({
-    baseURL: 'http://localhost:3030',
+    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
     timeout: 10000,
     withCredentials: true,
   });
