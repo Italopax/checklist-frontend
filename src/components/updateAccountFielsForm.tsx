@@ -5,14 +5,19 @@ import { useEffect, useState } from "react";
 import Input from "./inputs/input";
 import Button from "./button";
 import Divisor from "./divisor";
-import { getMeData, updateAccountInfos, updateAccountPassword } from "@/actions/user";
+import { disableUser, getMeData, updateAccountInfos, updateAccountPassword } from "@/actions/user";
 import ErrorMessage from "./errorMessage";
+import { useRouter } from "next/navigation";
+import { Storage } from "@/utils/storage";
+import { PagesRoutes } from "@/models";
 
 export default function UpdateAccountFielsForm () {
   const {
     user,
     setUser,
   } = useGlobalContext();
+
+  const router = useRouter();
 
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -25,6 +30,9 @@ export default function UpdateAccountFielsForm () {
 
   const [userDataError, setUserDataError] = useState<string>('');
   const [passwordsError, setPasswordsError] = useState<string>('');
+
+  const [disableUserLoading, setDisableUserLoading] = useState<boolean>(false);
+  const [disableUserError, setDisableUserError] = useState<string>('');
 
   useEffect(() => {
     setName(user?.name || '');
@@ -69,6 +77,23 @@ export default function UpdateAccountFielsForm () {
     }
   }
 
+  const disableUserSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      setDisableUserLoading(true);
+      await disableUser();
+
+      Storage.removeCookies(['accessToken', 'refreshToken']);
+      router.push(PagesRoutes.LOGIN);
+    } catch (error) {
+      setDisableUserError(error.message);
+      return;
+    } finally {
+      setDisableUserLoading(false);
+    }
+  }
+
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-4">
@@ -98,9 +123,7 @@ export default function UpdateAccountFielsForm () {
           />
         </form>
       </div>
-
       <Divisor />
-
       <div className="flex flex-col gap-4">
         <p>Atualize sua senha.</p>
         <form className="flex flex-col gap-4" onSubmit={updatePassword}>
@@ -126,6 +149,20 @@ export default function UpdateAccountFielsForm () {
             type="submit"
             loading={passwordsLoading}
           />
+        </form>
+      </div>
+      <Divisor />
+      <div>
+        <form className="flex flex-col gap-4" onSubmit={disableUserSubmit}>
+          <Button
+            text="Desabilitar conta"
+            type="submit"
+            loading={disableUserLoading}
+            alertColor
+          />
+          {disableUserError && (
+            <ErrorMessage error={disableUserError} />
+          )}
         </form>
       </div>
     </div>

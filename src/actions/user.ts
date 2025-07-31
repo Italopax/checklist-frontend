@@ -95,3 +95,13 @@ export async function updateAccountPassword ({ actualPassword, newPassword }: { 
     throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
   }
 }
+
+export async function disableUser (): Promise<void> {
+  try {
+    const instance = getServerInstance();
+    await instance.post('/user/disable');
+  } catch (error) {
+    console.log('error:', error);
+    throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
+  }
+}

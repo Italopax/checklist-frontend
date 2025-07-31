@@ -8,6 +8,7 @@ interface ButtonProps {
   onSubmit?: FormEventHandler<HTMLButtonElement> | undefined;
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
   secondaryColor?: boolean;
+  alertColor?: boolean;
 }
 
 export default function Button ({
@@ -16,8 +17,21 @@ export default function Button ({
   loading = false,
   onClick,
   secondaryColor,
+  alertColor,
 }: ButtonProps) {
-  const backgroundColor = secondaryColor ? 'bg-(--border)' : 'bg-(--background)';
+  let backgroundColor = 'bg-(--background)';
+
+  switch (true) {
+    case secondaryColor:
+      backgroundColor = 'bg-(--border)';
+      break;
+    case alertColor:
+      backgroundColor = 'bg-(--destructive)';
+      break;
+    default:
+      backgroundColor = 'bg-(--background)';
+      break;
+  }
 
   const hoverButtonClasses = !loading ? `hover:opacity-80` : '';
   const buttonContent = loading ? <Loading /> : text;
