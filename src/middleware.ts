@@ -16,7 +16,7 @@ export async function middleware (request: NextRequest) {
       case !hasAuthorizationToken: 
         return NextResponse.next();
       case hasAuthorizationToken:
-        return NextResponse.redirect(new URL(PagesRoutes.ROOT, request.nextUrl));
+        return NextResponse.redirect(new URL(PagesRoutes.ITEMS_GROUPS, request.nextUrl));
     }
   } else {
     switch (true) {

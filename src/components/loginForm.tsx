@@ -33,7 +33,7 @@ export default function LoginForm () {
       setLoading(false);
     }
 
-    redirect(PagesRoutes.VALIDATE_EMAIL);   
+    redirect(PagesRoutes.VALIDATE_EMAIL);
   }
 
   useEffect(() => {

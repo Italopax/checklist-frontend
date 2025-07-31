@@ -56,7 +56,7 @@ export default function ProtectedRoutesWrapper ({ children }: { children: React.
         break;
 
       case user?.status === UserStatus.ACTIVE && isValidateEmailPage:
-        router.push(PagesRoutes.ROOT);
+        router.push(PagesRoutes.ITEMS_GROUPS);
         break;
 
       default:

@@ -37,7 +37,7 @@ export default function ValidateEmailForm () {
       setLoading(false);
     }
 
-    redirect(PagesRoutes.ROOT);   
+    redirect(PagesRoutes.ITEMS_GROUPS);   
   }
   
   const resendVerificationCodeSubmit = async (): Promise<void> => {
