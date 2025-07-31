@@ -1,6 +1,7 @@
 'use client';
 
 import RecoveryPasswordForm from "@/components/recoveryPassowrdForm";
+import { Suspense } from "react";
 
 export default function NewPassword () {
   return (
@@ -10,7 +11,9 @@ export default function NewPassword () {
         <p>Insira o seu código de verificação e a nova senha desejada.</p>
       </div>
       <div className="flex flex-col gap-4">
-        <RecoveryPasswordForm />
+        <Suspense>
+          <RecoveryPasswordForm />
+        </Suspense>
       </div>
     </section>
   );
