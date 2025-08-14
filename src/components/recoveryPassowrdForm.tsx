@@ -3,7 +3,7 @@
 import Button from "./button";
 import ErrorMessage from "./errorMessage";
 import Input from "./inputs/input";
-import { redirect, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { recoveryPassword } from "@/actions/user";
 import { PagesRoutes } from "@/models";
@@ -16,6 +16,8 @@ export default function RecoveryPasswordForm () {
 
   const searchParams = useSearchParams();
   const userEmail = searchParams.get('email') || '';
+
+  const router = useRouter();
 
   const recoveryPasswordForm = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
@@ -34,7 +36,7 @@ export default function RecoveryPasswordForm () {
       setLoading(false);
     }
 
-    redirect(PagesRoutes.LOGIN);
+    router.push(PagesRoutes.LOGIN);
   }
 
   useEffect(() => {

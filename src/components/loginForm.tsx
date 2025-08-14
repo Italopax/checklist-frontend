@@ -5,7 +5,7 @@ import Button from "./button";
 import Input from "./inputs/input";
 import { loginSubmit } from "@/actions/auth";
 import ErrorMessage from "./errorMessage";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useGlobalContext } from "@/context/globalContext";
 import { PagesRoutes } from "@/models";
 
@@ -20,6 +20,8 @@ export default function LoginForm () {
     setError,
   } = useGlobalContext();
 
+  const router = useRouter();
+
   const loginFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -33,7 +35,7 @@ export default function LoginForm () {
       setLoading(false);
     }
 
-    redirect(PagesRoutes.VALIDATE_EMAIL);
+    router.push(PagesRoutes.VALIDATE_EMAIL);
   }
 
   useEffect(() => {

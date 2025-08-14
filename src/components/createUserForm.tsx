@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Input from "./inputs/input";
 import ErrorMessage from "./errorMessage";
 import Button from "./button";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { createUserSubmit } from "@/actions/user";
 import { useGlobalContext } from "@/context/globalContext";
 import { PagesRoutes } from "@/models";
@@ -21,6 +21,8 @@ export default function CreateUserForm () {
     setError,
   } = useGlobalContext();
 
+  const router = useRouter();
+
   const createUserFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -34,7 +36,7 @@ export default function CreateUserForm () {
       setLoading(false);
     }
 
-    redirect(PagesRoutes.LOGIN);
+    router.push(PagesRoutes.LOGIN);
   }
 
   useEffect(() => {

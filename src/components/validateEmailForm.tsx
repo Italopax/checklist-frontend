@@ -4,7 +4,7 @@ import { useGlobalContext } from "@/context/globalContext";
 import Button from "./button";
 import ErrorMessage from "./errorMessage";
 import Input from "./inputs/input";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getMeData, resendVerificationCode, validateEmail } from "@/actions/user";
 import { PagesRoutes } from "@/models";
@@ -20,6 +20,8 @@ export default function ValidateEmailForm () {
     error,
     setError,
   } = useGlobalContext();
+
+  const router = useRouter();
 
   const validateEmailSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
@@ -37,7 +39,7 @@ export default function ValidateEmailForm () {
       setLoading(false);
     }
 
-    redirect(PagesRoutes.ITEMS_GROUPS);   
+    router.push(PagesRoutes.ITEMS_GROUPS);   
   }
   
   const resendVerificationCodeSubmit = async (): Promise<void> => {
