@@ -33,9 +33,8 @@ export default function LoginForm () {
       return;
     } finally {
       setLoading(false);
+      return router.push(PagesRoutes.VALIDATE_EMAIL);
     }
-
-    router.push(PagesRoutes.VALIDATE_EMAIL);
   }
 
   useEffect(() => {
