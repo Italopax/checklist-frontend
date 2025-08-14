@@ -28,12 +28,12 @@ export default function LoginForm () {
     try {
       setLoading(true);
       await loginSubmit({ login, password });
+      router.push(PagesRoutes.VALIDATE_EMAIL);
     } catch (error) {
       setError(error.message);
       return;
     } finally {
       setLoading(false);
-      return router.push(PagesRoutes.VALIDATE_EMAIL);
     }
   }
 

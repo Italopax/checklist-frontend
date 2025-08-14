@@ -29,14 +29,13 @@ export default function RecoveryPasswordForm () {
         newPassword,
         email: userEmail,
       });
+      router.push(PagesRoutes.LOGIN);
     } catch (error) {
       setError(error.message);
       return;
     } finally {
       setLoading(false);
     }
-
-    router.push(PagesRoutes.LOGIN);
   }
 
   useEffect(() => {

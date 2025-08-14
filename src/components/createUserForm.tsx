@@ -29,14 +29,13 @@ export default function CreateUserForm () {
     try {
       setLoading(true);
       await createUserSubmit({ name, email, password });
+      router.push(PagesRoutes.LOGIN);
     } catch (error) {
       setError(error.message);
       return;
     } finally {
       setLoading(false);
     }
-
-    router.push(PagesRoutes.LOGIN);
   }
 
   useEffect(() => {

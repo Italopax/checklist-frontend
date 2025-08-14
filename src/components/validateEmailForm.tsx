@@ -32,14 +32,14 @@ export default function ValidateEmailForm () {
 
       const userData = await getMeData();
       setUser(userData);
+
+      router.push(PagesRoutes.ITEMS_GROUPS);
     } catch (error) {
       setError(error.message);
       return;
     } finally {
       setLoading(false);
     }
-
-    router.push(PagesRoutes.ITEMS_GROUPS);   
   }
   
   const resendVerificationCodeSubmit = async (): Promise<void> => {

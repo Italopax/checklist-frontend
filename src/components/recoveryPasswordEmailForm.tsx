@@ -21,15 +21,13 @@ export default function RecoveryPasswordEmailForm () {
     try {
       setLoading(true);
       await sendRecoveryPasswordVerificationCode(email);
-
+      router.push(`${PagesRoutes.NEW_PASSWORD}?email=${encodeURIComponent(email)}`);
     } catch (error) {
       setError(error.message);
       return;
     } finally {
       setLoading(false);
     }
-
-    router.push(`${PagesRoutes.NEW_PASSWORD}?email=${encodeURIComponent(email)}`);
   }
 
   useEffect(() => {
