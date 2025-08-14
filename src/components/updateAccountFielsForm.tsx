@@ -8,8 +8,8 @@ import Divisor from "./divisor";
 import { disableUser, getMeData, updateAccountInfos, updateAccountPassword } from "@/actions/user";
 import ErrorMessage from "./errorMessage";
 import { useRouter } from "next/navigation";
-import { Storage } from "@/utils/storage";
 import { PagesRoutes } from "@/models";
+import { logout } from "@/actions/auth";
 
 export default function UpdateAccountFielsForm () {
   const {
@@ -84,7 +84,7 @@ export default function UpdateAccountFielsForm () {
       setDisableUserLoading(true);
       await disableUser();
 
-      Storage.removeCookies(['accessToken', 'refreshToken']);
+      await logout();
       router.push(PagesRoutes.LOGIN);
     } catch (error) {
       setDisableUserError(error.message);

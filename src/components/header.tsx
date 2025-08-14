@@ -4,7 +4,7 @@ import { PagesRoutes } from "@/models";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Button from "./button";
-import { Storage } from "@/utils/storage";
+import { logout } from "@/actions/auth";
 
 export default function Header () {
   const pathname = usePathname();
@@ -20,8 +20,8 @@ export default function Header () {
   
   const pageSelectedStyle = (page: string) => page === actualPage ? 'font-bold underline underline-offset-8' : '';
 
-  function logout (): void {
-    Storage.removeCookies(['accessToken', 'refreshToken']);
+  async function logoutSubmit (): Promise<void> {
+    await logout()
     router.push(PagesRoutes.LOGIN);
   }
 
@@ -51,7 +51,7 @@ export default function Header () {
         <Button
           text="Logout"
           type="button"
-          onClick={logout}
+          onClick={logoutSubmit}
         />
       </div>
     </header>

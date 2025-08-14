@@ -17,3 +17,12 @@ export async function refershToken (): Promise<void> {
     throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
   }
 }
+
+export async function logout(): Promise<void> {
+  try {
+    const instance = getServerInstance();
+    await instance.post<void>('/auth/logout');
+  } catch (error) {
+    throw new Error(error.response?.data?.errorMessage || 'Ocorreu um erro inesperado.');
+  }
+}
