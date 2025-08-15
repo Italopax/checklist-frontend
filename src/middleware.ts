@@ -1,13 +1,11 @@
-import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { PagesRoutes } from './models';
 
 export async function middleware (request: NextRequest) {
   const unproctedRoutes = ['/login', '/create-account', '/recovery-password', '/new-password'];
-  const applicationCookies = (await cookies()).getAll();
 
-  const accessToken = applicationCookies.find((cookie) => cookie.name === 'accessToken');
-  const refreshToken = applicationCookies.find((cookie) => cookie.name === 'refreshToken');
+  const accessToken = request.cookies.get('accessToken');
+  const refreshToken = request.cookies.get('refreshToken');
   
   const hasAuthorizationToken: boolean = Boolean(accessToken?.value || refreshToken?.value);
 
