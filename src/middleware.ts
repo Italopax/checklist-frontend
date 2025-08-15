@@ -10,10 +10,9 @@ export async function middleware (request: NextRequest) {
   console.log(`refreshToken: ${refreshToken?.value}`);
   
   const hasAuthorizationToken: boolean = Boolean(accessToken?.value || refreshToken?.value);
-  console.log(`hasAuthorizationToken: ${hasAuthorizationToken}`);
-
-  console.log('unproctedRoutes.includes(request.nextUrl.pathname):', unproctedRoutes.includes(request.nextUrl.pathname))
-  console.log(`unproctedRoutes.includes(request.nextUrl.pathname) 2: ${hasAuthorizationToken}`)
+  console.log(`cookies: ${JSON.stringify(request.cookies.getAll())} - 
+ accessToken?.value: ${accessToken?.value} -
+ refreshToken?.value: ${refreshToken?.value}`);
 
   if (unproctedRoutes.includes(request.nextUrl.pathname)) {
     switch (true) {
